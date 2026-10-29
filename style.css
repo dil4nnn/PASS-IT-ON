@@ -1,0 +1,614 @@
+/* PASS IT ON - ÉÉN CSS VOOR VIER PAGINA'S
+   Vaste desktoplay-out: 842px, geen responsive CSS en geen JavaScript.
+   De teksten staan in HTML; deze CSS regelt alleen het uiterlijk. */
+/* CSS-00: @import haalt de twee lettertypes via Google Fonts op.
+   Zonder internet gebruikt de browser een reservelettertype. */
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Azeret+Mono:wght@400;700&display=swap');
+
+/* 1. BASIS - algemene instellingen voor alle pagina's. */
+/* CSS-01: :root bewaart onze kleuren op één plek.
+   var(--blauw) of var(--roze) gebruikt die kleur ergens anders. */
+:root {
+  --blauw: #0000FF;
+  --roze: #F2C6DD;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* CSS-02: body is de hele zichtbare pagina.
+   margin: 0 haalt de standaard buitenrand weg.
+   18px is de tekstgrootte; /1.2 is de regelafstand. */
+body {
+  margin: 0;
+  font: 18px/1.2 'Azeret Mono', monospace;
+}
+
+/* CSS-03: .site hoort bij class="site" in HTML.
+   width: 842px = de vaste breedte uit de PDF; margin: 0 auto = centreren.
+   overflow: hidden verbergt decoratie buiten de pagina. */
+.site {
+  width: 842px;
+  margin: 0 auto;
+  overflow: hidden;
+  background: white;
+}
+
+main {
+  position: relative;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: var(--blauw);
+}
+
+a:focus-visible {
+  outline: 2px solid var(--roze);
+}
+
+h1,
+h2,
+h3,
+.logo,
+nav a,
+.stappen,
+.nummer,
+.paginalinks,
+.manifest-slot {
+  font-family: Anton, Impact, sans-serif;
+  font-weight: normal;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+}
+
+h1 {
+  color: var(--blauw);
+  line-height: 1.05;
+}
+
+/* 2. MENU - gemeenschappelijk voor alle vier de pagina's. */
+/* CSS-04: Flexbox zet het logo links en het menu rechts.
+   align-items centreert verticaal; justify-content verdeelt de ruimte.
+   position: relative + z-index: 10 houden het menu VOOR de decoraties. */
+header {
+  height: 75px;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--blauw);
+  /* Het menu blijft boven alle decoraties */  
+  position: relative;
+  z-index: 10;
+}
+
+.logo {
+  color: white;
+  text-decoration: none;
+  font-size: 34px;
+  transform: skewX(-10deg);
+}
+
+nav {
+  display: flex;
+  gap: 48px;
+}
+
+nav a {
+  color: white;
+  font-size: 19px;
+  text-decoration: none;
+}
+
+/* CSS-05: :hover = muis erover; :focus-visible = geselecteerd met toetsenbord.
+   [aria-current="page"] = de huidige pagina (staat in de HTML bij één link).
+   De link wordt roze; geen JavaScript nodig. */
+nav a:hover,
+nav a:focus-visible,
+nav a[aria-current="page"] {
+  color: var(--roze);
+  text-decoration: underline;
+}
+
+/* 3. HOME - startpagina en grote titel. */
+/* CSS-06: .hero bevat de grote titel en knop.
+   position: relative is het kader waar absolute top/left-posities vanaf tellen. */
+.hero {
+  height: 600px;
+  padding: 30px 58px;
+  position: relative;
+}
+
+/* CSS-07: de titel is extra groot en schuin om op de PDF te lijken.
+   transform = draaien (rotate), schuin maken (skewX) of rekken (scaleX).
+   span+span betekent: de tweede span (IT ON) volgt op de eerste (PASS). */
+.home-titel {
+  position: relative;
+  z-index: 1;
+  margin-left: 29px;
+  font-size: 190px;
+  /* Skew maakt de letters schuin; de spans krijgen elk een eigen lichte rotatie. */
+  transform: scaleX(.75) skewX(-11deg);
+  transform-origin: left top;
+}
+
+/* Beide regels krijgen dezelfde schuine hoek als in de PDF.
+   top verschuift alleen de tekst, niet de andere onderdelen. */
+.home-titel span {
+  position: relative;
+  display: block;
+  left: 1px;
+  top: 14px;
+  transform: rotate(-4.5deg) scaleY(.92);
+  transform-origin: left center;
+}
+
+.home-titel span+span {
+  margin-top: 8px;
+  margin-left: 12px;
+  top: 10px;
+}
+
+/* CSS-08: position: absolute zet de ondertitel vast in .hero.
+   top en left meten vanaf de boven-/linkerkant van die .hero.
+   padding = ruimte BINNEN de roze achtergrond; letter-spacing = letterafstand. */
+.ondertitel {
+  position: absolute;
+  z-index: 1;
+  top: 424px;
+  left: 42px;
+  display: inline-block;
+  padding: 10px 12px;
+  margin: 0;
+  background: var(--roze);
+  color: var(--blauw);
+  transform: rotate(-6deg);
+  /* Kleine letterafstand zoals in de PDF, zonder extra spaties tussen woorden. */
+  font-size: 18px;
+  letter-spacing: .12px;
+}
+
+.knop {
+  position: absolute;
+  z-index: 1;
+  left: 45px;
+  bottom: 30px;
+  padding: 11px 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+  color: white;
+  background: var(--blauw);
+  text-decoration: none;
+}
+
+.knop img {
+  width: 36px;
+}
+
+.stappen {
+  height: 69px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  background: var(--roze);
+  color: var(--blauw);
+  font-size: 36px;
+}
+
+.stappen span {
+  transform: skewX(-10deg);
+}
+
+.stappen img {
+  width: 36px;
+}
+
+.home-onder {
+  position: relative;
+  height: 447px;
+}
+
+.paginalinks {
+  position: relative;
+  z-index: 1;
+  width: 714px;
+  margin-left: 75px;
+}
+
+/* CSS-09: Grid verdeelt elke homepage-link in drie kolommen:
+   het nummer, de tekst en de pijl. 1fr = de resterende ruimte. */
+.paginalinks a {
+  display: grid;
+  grid-template-columns: 80px 1fr 70px;
+  gap: 40px;
+  padding: 0 22px 0 24px;
+  align-items: center;
+  height: 118px;
+  border-bottom: 1px solid var(--blauw);
+  color: var(--blauw);
+  font-size: 48px;
+  text-decoration: none;
+}
+
+.nummer {
+  font-size: 48px;
+  border-right: 1px solid var(--blauw);
+}
+
+.paginalinks img {
+  width: 66px;
+}
+
+footer {
+  position: relative;
+  z-index: 1;
+  padding: 27px 58px;
+  text-align: right;
+  font-size: 21px;
+}
+
+/* 4. MANIFEST - de eerste twee kolommen: foto links, tekst rechts. */
+/* CSS-10: display:grid maakt kolommen.
+   307px = breedte collage; 1fr = overige ruimte voor de tekst.
+   gap = lege ruimte tussen de kolommen. */
+.manifest-intro {
+  height: 312px;
+  padding: 46px 46px 0;
+  position: relative;
+}
+
+.manifest-titel {
+  position: relative;
+  z-index: 1;
+  top: 40px;
+  font-size: 170px;
+  line-height: 1;
+  white-space: nowrap;
+  transform: scaleX(.845) skewX(-10deg) rotate(-5deg);
+  transform-origin: left top;
+}
+
+.manifest-intro p {
+  position: absolute;
+  z-index: 1;
+  top: 225px;
+  left: 78px;
+  margin: 0;
+  color: var(--blauw);
+  font-size: 21px;
+  transform: rotate(-5deg);
+}
+
+.manifest-grid {
+  display: grid;
+  grid-template-columns: 307px 1fr;
+  gap: 32px;
+  align-items: start;
+}
+
+.collage {
+  width: 307px;
+  height: auto;
+}
+
+.manifest-tekst {
+  padding: 0 25px 0 0;
+}
+
+.manifest-tekst p {
+  margin: 0 0 17px;
+}
+
+/* De roze strook loopt 70px door buiten beide paginaranden.
+   Daardoor ontstaan bij de schuine hoek geen witte gaten aan de zijkanten. */
+/* CSS-11: de roze citaatbalk is expres breder dan de 842px-pagina,
+   zodat hij gedraaid de volledige breedte bedekt.
+   Een hoog z-index staat voor een lager z-index (bij dezelfde stapelcontext). */
+.manifest-citaat {
+  position: relative;
+  z-index: 1;
+  width: 982px;
+  margin: 18px 0 0 -70px;
+  padding: 19px 82px;
+  background: var(--roze);
+  text-align: center;
+  transform: rotate(-4deg);
+}
+
+.manifest-citaat blockquote {
+  position: relative;
+  z-index: 2;
+  margin: 0;
+  font: 51px/1.11 Anton, Impact, sans-serif;
+  color: var(--blauw);
+  transform: skewX(-10deg);
+}
+
+.manifest-slot {
+  margin: 43px 50px 45px;
+  color: var(--blauw);
+  font-size: 21px;
+  transform: skewX(-10deg);
+}
+
+.vervolg {
+  width: 740px;
+  margin: 70px auto 50px;
+}
+
+.vervolg h2 {
+  margin-bottom: 17px;
+  color: var(--blauw);
+  font-size: 32px;
+}
+
+.vervolg p {
+  margin: 0 0 22px;
+}
+
+/* 5. ENCYCLOPEDIE - dezelfde .kenniskaart hergebruiken. */
+/* CSS-12: :first-child is de eerste kaart, :nth-child(2) de tweede.
+   Op die twee kaarten staat een blauwe SVG-cirkel als achtergrond. */
+.kennis-kop {
+  height: 329px;
+  position: relative;
+  padding: 46px 80px 0;
+}
+
+.kennis-kop h1 {
+  position: relative;
+  z-index: 1;
+  font-size: 84px;
+  line-height: 1.06;
+  transform: scaleX(.65) skewX(-10deg) rotate(-3deg);
+  transform-origin: top left;
+}
+
+.kennis-intro {
+  width: 744px;
+  margin: 0 auto 40px;
+}
+
+.kennis-lijst {
+  position: relative;
+  z-index: 1;
+}
+
+.kenniskaart {
+  width: 756px;
+  min-height: 210px;
+  margin: 0 auto 52px;
+  padding: 17px 0 18px 101px;
+  background: var(--roze);
+}
+
+.kenniskaart h2 {
+  font: bold 21px/1.4 'Azeret Mono', monospace;
+  color: #111;
+  margin: 0 0 19px;
+}
+
+.kenniskaart p {
+  margin: 0 0 20px;
+}
+
+.kenniskaart p:last-child {
+  margin-bottom: 0;
+}
+
+/* De twee cirkels komen uit de officiële blauwe SVG.
+   Hun middelpunt staat 86,5px vanaf links, zoals in de originele PDF. */
+.kennis-lijst .kenniskaart:first-child {
+  background: url("afbeeldingen/cirkel-blauw.svg") no-repeat -16px 46px / 120px auto, var(--roze);
+}
+
+.kennis-lijst .kenniskaart:nth-child(2) {
+  background: url("afbeeldingen/cirkel-blauw.svg") no-repeat -16px 43px / 120px auto, var(--roze);
+}
+
+.kennis-verdieping {
+  position: relative;
+  z-index: 1;
+  width: 756px;
+  margin: 140px auto 95px;
+  background: white;
+}
+
+.kennis-verdieping>h2 {
+  color: var(--blauw);
+  font-size: 33px;
+}
+
+.verdieping-tekst {
+  margin-bottom: 30px;
+}
+
+.verdieping-tekst h3 {
+  margin: 0 0 12px;
+  color: var(--blauw);
+  font-size: 24px;
+}
+
+.kennis-verdieping .kenniskaart {
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+/* 6. BRONNEN - dezelfde class voor alle drie bronkaarten. */
+/* CSS-13: display:grid zet foto en beschrijving naast elkaar.
+   rgba(242, 198, 221, 0.5) = roze met 50% doorzichtigheid.
+   Zo blijven blauwe stippen achter de kaarten zichtbaar,
+   terwijl de tekst en foto zelf NIET transparant worden. */
+.bronnen-kop {
+  height: 299px;
+  padding: 50px 53px 0;
+  position: relative;
+  z-index: 1;
+}
+
+.bronnen-kop h1 {
+  font-size: 69px;
+  line-height: 1.4;
+  transform: scaleX(.79) skewX(-10deg) rotate(-4deg);
+  transform-origin: top left;
+}
+
+.bronnen-kaarten {
+  position: relative;
+  z-index: 1;
+  width: 644px;
+  margin-left: 47px;
+}
+
+.bronkaart {
+  display: grid;
+  grid-template-columns: 226px 355px;
+  gap: 39px;
+  align-items: start;
+  height: 188px;
+  margin: 0 0 96px;
+  padding: 21px 23px;
+  /* Alleen de roze ACHTERGROND is 50% transparant; tekst en foto blijven scherp. */
+  background: rgba(242, 198, 221, 0.5);
+}
+
+.bronkaart>img {
+  width: 226px;
+  height: 135px;
+  object-fit: cover;
+}
+
+.bronkaart h2 {
+  font-size: 24px;
+  line-height: 1.15;
+}
+
+.bronkaart h2 a {
+  color: var(--blauw);
+  text-decoration: none;
+}
+
+.bronkaart h2 a:hover {
+  text-decoration: underline;
+}
+
+.bronkaart p {
+  font-size: 14px;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.bronkaart p.maker {
+  font-size: 18px;
+  margin: 1px 0 17px;
+}
+
+.bronnen-onderaan {
+  position: relative;
+  z-index: 1;
+  width: 740px;
+  margin: 55px auto 100px;
+  overflow-wrap: anywhere;
+}
+
+.bronnen-onderaan h2 {
+  font-size: 28px;
+  color: var(--blauw);
+}
+
+.bronnen-onderaan li {
+  margin-bottom: 8px;
+}
+
+/* 7. DECORATIES - originele SVG's van de student.
+   CSS-14: alle precieze px-getallen volgen de PDF-lay-outs.
+   position:absolute = vrije plaatsing; z-index = voor of achter.
+   pointer-events:none = decoraties blokkeren geen muisklik.
+   Dit onderdeel hoeft de student niet van buiten te kennen. */
+.decor {
+  position: absolute;
+  pointer-events: none;
+  max-width: none;
+}
+
+/* De roze cirkel is alleen voor HOME. De blauwe golf is de originele SVG.
+   De golf past volledig tussen de linker- en rechterrand: 352 + 480 = 832px.
+   De website zelf blijft 842px breed, zodat de PDF-verhoudingen behouden blijven. */
+.home-gloed {
+  width: 493px;
+  left: 356px;
+  top: -17px;
+  filter: drop-shadow(0 0 4px rgba(55, 55, 55, .28));
+}
+
+.home-vorm {
+  width: 480px;
+  left: 352px;
+  top: 18px;
+}
+
+.onderlijnen {
+  width: 1338px;
+  left: -26px;
+  top: 105px;
+  transform: matrix(.4318, .0341, -.0482, .4166, 0, 0);
+  transform-origin: top left;
+}
+
+.manifest-lijnen {
+  width: 331px;
+  left: 539px;
+  top: -20px;
+  transform: scaleY(.953);
+  transform-origin: top left;
+}
+
+/* De blauwe cirkel ligt VOOR de roze citaatbalk (z-index 3 > 1). */
+.manifest-cirkel {
+  width: 330px;
+  right: -113px;
+  top: 906px;
+  z-index: 3;
+}
+
+.vlinder {
+  width: 306px;
+  left: 471px;
+  top: 39px;
+}
+
+.kennis-lijnen-links {
+  width: 1184px;
+  left: -171px;
+  top: 378px;
+}
+
+.bronnen-lijnen {
+  width: 546px;
+  left: 522px;
+  top: -80px;
+  z-index: 2;
+  transform: rotate(12.44deg);
+  transform-origin: top left;
+}
+
+/* Dit is letterlijk de door de student aangeleverde BLAUWE SVG (blurredberry).
+   De roze kaarten staan ervoor, maar de donkerblauwe delen erboven/eronder blijven zichtbaar.
+   Let op: de roze gloed van Home wordt op Bronnen NIET gebruikt. */
+.bronnen-gloeden {
+  width: 554px;
+  left: 75px;
+  top: 225px;
+}

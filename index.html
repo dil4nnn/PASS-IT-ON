@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="nl">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>Home | PASS IT ON</title>
+  <!-- HTML-01: deze link haalt het bestand style.css binnen voor de hele pagina. -->
+  <link href="style.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <div class="site">
+   <header>
+    <a class="logo" href="index.html">PASS IT ON</a>
+    <!-- HTML-02: href gaat naar een andere HTML-pagina; aria-current markeert de huidige. -->
+    <nav>
+     <a aria-current="page" href="index.html">Home</a>
+     <a href="manifest.html">Manifest</a>
+     <a href="encyclopedie.html">Encyclopedie</a>
+     <a href="bronnen.html">Bronnen</a>
+    </nav>
+   </header>
+   <!-- HTML-03: class="..." is de naam waarmee CSS dit onderdeel terugvindt. -->
+   <main>
+    <section class="hero">
+     <img alt="" class="home-gloed decor" src="afbeeldingen/cirkel-roze.svg"/>
+     <img alt="" class="home-vorm decor" src="afbeeldingen/blauwe-golf-origineel-v21.svg"/>
+     <!-- HTML-04: twee spans = twee losse regels die CSS schuin kan maken. -->
+     <h1 class="home-titel">
+      <span>PASS</span>
+      <span>IT ON</span>
+     </h1>
+     <p class="ondertitel">Creatieve uitwisseling op het web</p>
+     <a class="knop" href="manifest.html">
+      Lees het manifest
+      <img alt="" src="afbeeldingen/pijl-knop.svg"/>
+     </a>
+    </section>
+    <!-- HTML-05: dit onderdeel gebruikt display:flex in de CSS. -->
+    <section class="stappen">
+     <span>ONTDEK</span>
+     <img alt="" src="afbeeldingen/pijl-stap.svg"/>
+     <span>COMBINEER</span>
+     <img alt="" src="afbeeldingen/pijl-stap.svg"/>
+     <span>MAAK</span>
+     <img alt="" src="afbeeldingen/pijl-stap.svg"/>
+     <span>DEEL</span>
+    </section>
+    <section class="home-onder">
+     <img alt="" class="onderlijnen decor" src="afbeeldingen/lijnen-onder.svg"/>
+     <!-- HTML-06: dezelfde linkopbouw wordt drie keer herhaald. -->
+     <div class="paginalinks">
+      <a href="manifest.html">
+       <span class="nummer">01</span>
+       <span>Het manifest</span>
+       <img alt="" src="afbeeldingen/pijl-rond.svg"/>
+      </a>
+      <a href="encyclopedie.html">
+       <span class="nummer">02</span>
+       <span>Encyclopedie</span>
+       <img alt="" src="afbeeldingen/pijl-rond.svg"/>
+      </a>
+      <a href="bronnen.html">
+       <span class="nummer">03</span>
+       <span>Bronnen</span>
+       <img alt="" src="afbeeldingen/pijl-rond.svg"/>
+      </a>
+     </div>
+     <footer>Dilan Sevigen</footer>
+    </section>
+   </main>
+  </div>
+ </body>
+</html>
